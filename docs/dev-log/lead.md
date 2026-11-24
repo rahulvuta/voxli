@@ -1,0 +1,11 @@
+# Lead dev log
+
+- AI (Claude Opus) wrote `backend/src/voxli/audio.py` ring buffer → checked with its built-in self-test (1 s stereo write + wraparound read) → passed → kept.
+- AI wrote the session/server skeleton → checked with a FastAPI TestClient smoke test (hello → status; tts_start → YOU utterance) → passed → kept.
+
+## Integration pass (Nov 24)
+- **Speaker turns merged into one caption** (found by replaying `cafe_4spk` end to end: 3 people's lines on S3, 7 labels for 4 people). AI (Claude Opus) changed `deepgram_live.py` to split at Deepgram word-speaker changes and `session.py` to identify each sentence separately and rejoin same-voice neighbours → re-replayed: B, C, D correct on every turn, A split across 2 labels; 2 unit tests added → **kept**.
+- **Separated overlap streams created phantom speakers** (S6, S7 from degraded audio). Added read-only `IdentityEngine.match()` → unit test proves it never creates/updates a voice → **kept**.
+- **Overlap false alarms in noise** (eval agent: 18 detections for 1 real overlap, 9.8 s caption lag). Measured: detection 0.3 s per 58 s clip, separation 1.5–3.7 s per span; per-caption coverage did NOT separate real overlap from babble (real 3 s overlap = 0.9), but flag *frequency* did (babble 14/16 captions, café 2/16). First fix attempt still ran 5 spans back to back for 20 s and attached them to the wrong caption → **changed**: busy-room gate (≥4 of last 6 captions flagged → pause separation, `room` event + banner), longest span only, attach to the covering caption. Re-replay: noisy caption lag 8.3 s → 2.6 s, one separation; clean café interruption "Not yet." recovered (all 5 ASR engines had dropped it) → **kept**.
+- **Deepgram held finished sentences in continuous noise** (no `speech_final`). Release `is_final` chunks that end a sentence → unit test + replay → **kept**.
+- **"Local fallback loses a third of words"** → replay with a 20 s tail showed 0 lost sentences: the eval waited 4 s while local captions came in 10 s batches (VAD never saw a 400 ms pause in fluent speech). **Changed** cap 10 s → 6 s and min silence 400 → 250 ms → all 8 turns verbatim, correct speakers, median final lag 0.3 s. R2 runner tail raised to 8 s.

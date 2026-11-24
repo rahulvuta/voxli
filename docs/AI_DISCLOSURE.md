@@ -4,7 +4,7 @@ Compiled from `docs/dev-log/*.md` (one log per agent, written by that agent at t
 
 ## 1. How AI was used to build Voxli
 
-Voxli was built in one sprint by a team of Claude agents working in parallel from written task cards (`docs/PHASES.md`) against a shared interface contract (`docs/CONTRACT.md`): a lead (Claude Opus) plus one agent per card (pipeline, identity, overlap, context, web, eval; Claude Sonnet). **The AI wrote essentially all of the code and documentation.** The human owner set the goal, the rubric-driven task cards, and the rules (verbatim captions, "?" instead of a wrong label, synthetic data labelled as synthetic, no raw audio on disk); checks listed below were run by the agents (tests, scripts, profilers, screenshots) and reviewed by the lead.
+Voxli was built in one sprint by a team of Claude agents working in parallel from written task cards (`docs/PHASES.md`) against a shared interface contract (`docs/CONTRACT.md`): a lead (Claude Opus) plus one agent per card (pipeline, identity, overlap, context, web, eval; Claude Sonnet). **The AI wrote essentially all of the code and documentation.** The human owner wrote the product concept, added two features (learning names from introductions, type-to-speak replies), chose the stack trade-offs (cloud captions plus on-device fallback, word-by-word captions) and approved the plan; the lead agent wrote the rubric-driven task cards and the rules (verbatim captions, "?" instead of a wrong label, synthetic data labelled as synthetic, no raw audio on disk); checks listed below were run by the agents (tests, scripts, profilers, screenshots) and reviewed by the lead.
 
 **TODO(lead / owner): state here, in one honest sentence, which checks a human personally did (for example: phone test on a real device, reading the diff of X). Until that is written, the document must not claim human review.**
 
@@ -22,6 +22,14 @@ How to read the log: **AI produced -> checked how -> found -> decision**.
 | Failover state machine | 5 fake-engine tests, then real runs (invalid key, socket closed mid-clip) | tests found two bugs (reattach replayed 60 s of old audio; first status deduplicated) | kept after fixes |
 | Session rewrite (interim speakers, overlap task, undo, malformed input) | pytest with TestClient, end-to-end `replay.py` runs | false "Deepgram silent" failovers while the machine was loaded | kept; watchdog left at 2 s (see EVIDENCE.md section 3 for how it behaves under load) |
 | OpenRouter nova-3 request format | fetched the OpenRouter STT docs, made a real call | word times via `verbose_json` work | kept |
+
+### Lead integration pass (`docs/dev-log/lead.md`)
+| AI produced | How checked | Found | Decision |
+|---|---|---|---|
+| Card outputs wired end to end | real-time replay of `cafe_4spk` vs ground truth | quick turns merged into one caption (3 people on one label, 7 labels for 4) | **changed**: split at Deepgram speaker changes + per-sentence voice matching; re-replay 4 labels for 4, unit tests added |
+| First overlap-gating fix | re-replay of noisy babble clip | still ran 5 separations back to back for 20 s and attached them to the wrong caption | **changed**: longest span only, busy-room gate, attach to covering caption; lag 9.8 s -> 3.1 s |
+| Per-sentence split at 0.8 s minimum | R2 re-run | 2-speaker clip regressed to 3 labels ("Yes. It was easy." spawned a speaker) | **changed** minimum to 1.5 s; re-run 2/2 labels, 100% |
+| Local fallback "losing a third of words" (eval finding) | replay with a 20 s tail | no words lost; captions came in 10 s batches after the 4 s measuring window | **changed** VAD/cap settings and the eval tail; 0% WER, 0.3 s lag |
 
 ### Identity (Card 2)
 | AI produced | Checked how | Found | Decision |

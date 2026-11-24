@@ -1,0 +1,1030 @@
+[
+ {
+  "id": "turns_2spk_run1",
+  "clip": "turns_2spk",
+  "group": "R2 ordinary 1",
+  "expect": "8 turns captioned, WER<=5%, 2 labels, 0 flips, 0 confident-wrong",
+  "wall_s": 44.0,
+  "returncode": 0,
+  "finals": 8,
+  "wer": 0.0,
+  "recall_live": 1.0,
+  "recall_all": 1.0,
+  "finals_raw": [
+   {
+    "id": "u_d1-0",
+    "text": "Hi. Did you manage to find the restaurant okay?",
+    "start": 0.71999997,
+    "end": 3.6,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-1",
+    "text": "Yes. It was easy. The bus stops right outside the door.",
+    "start": 4.0,
+    "end": 7.6800003,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-2",
+    "text": "Great. I booked a table for 07:30, so we have a little time.",
+    "start": 8.1,
+    "end": 12.02,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-3",
+    "text": "Perfect. Should we order a starter to share while we wait?",
+    "start": 12.47,
+    "end": 15.67,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-4",
+    "text": "Good idea. I heard the mushroom soup here is excellent.",
+    "start": 16.14,
+    "end": 18.939999,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-5",
+    "text": "Then I will have the soup and maybe a green salad on the side.",
+    "start": 19.38,
+    "end": 22.74,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-6",
+    "text": "Sounds good. I will ask the waiter to bring two glasses of water.",
+    "start": 23.18,
+    "end": 26.7,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-7",
+    "text": "Thank you. By the way, did you get my message about Friday?",
+    "start": 27.15,
+    "end": 30.91,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   }
+  ],
+  "hyp": "Hi. Did you manage to find the restaurant okay? Yes. It was easy. The bus stops right outside the door. Great. I booked a table for 07:30, so we have a little time. Perfect. Should we order a starter to share while we wait? Good idea. I heard the mushroom soup here is excellent. Then I will have the",
+  "speaker_acc": 1.0,
+  "confident_wrong": 0,
+  "label_flips": 0,
+  "uncertain": 0,
+  "n_scored": 8,
+  "labels_used": 2,
+  "true_speakers": 2,
+  "names": [],
+  "suggestions": [],
+  "overlap_groups": 0,
+  "separated_utts": 0,
+  "directions": [],
+  "status": [
+   "reconnecting",
+   "deepgram"
+  ],
+  "errors": [],
+  "first_word_ms_after_word_ends": 362,
+  "final_lag_ms_median": 1487
+ },
+ {
+  "id": "selfintro_sarah",
+  "clip": "selfintro_sarah",
+  "group": "R2 ordinary 2",
+  "expect": "name 'Sarah' attached to the speaker who said 'I'm Sarah' (auto-applied)",
+  "wall_s": 30.8,
+  "returncode": 0,
+  "finals": 5,
+  "wer": 0.0,
+  "recall_live": 1.0,
+  "recall_all": 1.0,
+  "finals_raw": [
+   {
+    "id": "u_d1-0",
+    "text": "Hi, everyone. I'm Sarah. I just joined the team last week.",
+    "start": 0.71999997,
+    "end": 4.7999997,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-1",
+    "text": "Welcome, Sarah. Great to have you with us.",
+    "start": 5.29,
+    "end": 7.6099997,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-2",
+    "text": "Thank you. I am still finding my way around the building.",
+    "start": 8.07,
+    "end": 11.2699995,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-3",
+    "text": "No problem. I can show you the kitchen after the meeting.",
+    "start": 11.58,
+    "end": 14.86,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-4",
+    "text": "That would be really helpful. Thanks.",
+    "start": 15.309999,
+    "end": 17.63,
+    "speaker_id": "S1",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   }
+  ],
+  "hyp": "Hi, everyone. I'm Sarah. I just joined the team last week. Welcome, Sarah. Great to have you with us. Thank you. I am still finding my way around the building. No problem. I can show you the kitchen after the meeting. That would be really helpful. Thanks.",
+  "speaker_acc": 0.8,
+  "confident_wrong": 0,
+  "label_flips": 0,
+  "uncertain": 1,
+  "n_scored": 5,
+  "labels_used": 2,
+  "true_speakers": 2,
+  "names": [
+   [
+    "S1",
+    "Sarah",
+    "auto"
+   ]
+  ],
+  "suggestions": [
+   [
+    "Sarah",
+    "self_intro",
+    true
+   ]
+  ],
+  "overlap_groups": 0,
+  "separated_utts": 0,
+  "directions": [],
+  "status": [
+   "reconnecting",
+   "deepgram"
+  ],
+  "errors": [],
+  "first_word_ms_after_word_ends": 337,
+  "final_lag_ms_median": 1811
+ },
+ {
+  "id": "turns_2spk_run2",
+  "clip": "turns_2spk",
+  "group": "R2 repeat",
+  "expect": "same as run1 (repeatability: WER and labels within noise)",
+  "wall_s": 43.9,
+  "returncode": 0,
+  "finals": 8,
+  "wer": 0.0,
+  "recall_live": 1.0,
+  "recall_all": 1.0,
+  "finals_raw": [
+   {
+    "id": "u_d1-0",
+    "text": "Hi. Did you manage to find the restaurant okay?",
+    "start": 0.71999997,
+    "end": 3.6,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-1",
+    "text": "Yes. It was easy. The bus stops right outside the door.",
+    "start": 4.0,
+    "end": 7.6800003,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-2",
+    "text": "Great. I booked a table for 07:30, so we have a little time.",
+    "start": 8.1,
+    "end": 12.02,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-3",
+    "text": "Perfect. Should we order a starter to share while we wait?",
+    "start": 12.47,
+    "end": 15.67,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-4",
+    "text": "Good idea. I heard the mushroom soup here is excellent.",
+    "start": 16.14,
+    "end": 18.939999,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-5",
+    "text": "Then I will have the soup and maybe a green salad on the side.",
+    "start": 19.38,
+    "end": 22.74,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-6",
+    "text": "Sounds good. I will ask the waiter to bring two glasses of water.",
+    "start": 23.34,
+    "end": 26.7,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-7",
+    "text": "Thank you. By the way, did you get my message about Friday?",
+    "start": 27.15,
+    "end": 30.91,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   }
+  ],
+  "hyp": "Hi. Did you manage to find the restaurant okay? Yes. It was easy. The bus stops right outside the door. Great. I booked a table for 07:30, so we have a little time. Perfect. Should we order a starter to share while we wait? Good idea. I heard the mushroom soup here is excellent. Then I will have the",
+  "speaker_acc": 1.0,
+  "confident_wrong": 0,
+  "label_flips": 0,
+  "uncertain": 0,
+  "n_scored": 8,
+  "labels_used": 2,
+  "true_speakers": 2,
+  "names": [],
+  "suggestions": [],
+  "overlap_groups": 0,
+  "separated_utts": 0,
+  "directions": [],
+  "status": [
+   "reconnecting",
+   "deepgram"
+  ],
+  "errors": [],
+  "first_word_ms_after_word_ends": 354,
+  "final_lag_ms_median": 1514
+ },
+ {
+  "id": "noisy_cafe_babble_snr5",
+  "clip": "noisy_cafe_babble_snr5",
+  "group": "R2 demanding",
+  "expect": "4 speakers, babble at 5 dB SNR + an interruption: WER<=15%, no confident-wrong labels ('?' allowed)",
+  "wall_s": 71.2,
+  "returncode": 0,
+  "finals": 25,
+  "wer": 0.06593406593406594,
+  "recall_live": 0.9505494505494505,
+  "recall_all": 0.9615384615384616,
+  "finals_raw": [
+   {
+    "id": "u_d1-0",
+    "text": "Okay, everyone.",
+    "start": 0.0,
+    "end": 1.68,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": "og_u_d1-0"
+   },
+   {
+    "id": "u_d1-0_s0",
+    "text": "Okay, everyone. Let our",
+    "start": 0.804,
+    "end": 2.284,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "separated",
+    "overlap_group": "og_u_d1-0"
+   },
+   {
+    "id": "u_d1-0_s1",
+    "text": "We'll stop here",
+    "start": 0.804,
+    "end": 2.284,
+    "speaker_id": "UNKNOWN",
+    "speaker_uncertain": true,
+    "source": "separated",
+    "overlap_group": "og_u_d1-0"
+   },
+   {
+    "id": "u_d1-0_1",
+    "text": "What are we ordering to today?",
+    "start": 1.68,
+    "end": 3.5,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-1",
+    "text": "I will have a flat white and a blueberry muffin, please.",
+    "start": 3.58,
+    "end": 6.94,
+    "speaker_id": "S3",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-2",
+    "text": "Just a black tea for me. Can you?",
+    "start": 7.18,
+    "end": 9.589999,
+    "speaker_id": "S4",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": "og_u_d1-2"
+   },
+   {
+    "id": "u_d1-2_s0",
+    "text": "Custard black tea for me. Thank you.",
+    "start": 7.231999999999999,
+    "end": 9.59,
+    "speaker_id": "S4",
+    "speaker_uncertain": false,
+    "source": "separated",
+    "overlap_group": "og_u_d1-2"
+   },
+   {
+    "id": "u_d1-2_s1",
+    "text": "The pub probably is not taking a three",
+    "start": 7.231999999999999,
+    "end": 9.59,
+    "speaker_id": "UNKNOWN",
+    "speaker_uncertain": true,
+    "source": "separated",
+    "overlap_group": "og_u_d1-2"
+   },
+   {
+    "id": "u_d1-3",
+    "text": "Can I get an iced latte with oatmeal and two shots?",
+    "start": 9.67,
+    "end": 12.789999,
+    "speaker_id": "S5",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-4",
+    "text": "And I will take a cappuccino.",
+    "start": 13.28,
+    "end": 14.8,
+    "speaker_id": "S4",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-4_1",
+    "text": "Does anyone want to share a croissant?",
+    "start": 14.8,
+    "end": 17.04,
+    "speaker_id": "S2",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-5",
+    "text": "Yes. I would love half of one, but only if it is warm.",
+    "start": 17.48,
+    "end": 20.76,
+    "speaker_id": "S4",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-6",
+    "text": "Did you all see the new exhibition that opens on Saturday at the museum?",
+    "start": 21.4,
+    "end": 25.4,
+    "speaker_id": "S3",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-6_1",
+    "text": "The tickets are cost $25 each.",
+    "start": 25.4,
+    "end": 27.97,
+    "speaker_id": "S5",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-7",
+    "text": "That seems like a lot.",
+    "start": 28.05,
+    "end": 29.09,
+    "speaker_id": "S2",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-8",
+    "text": "But I would still go if we went together.",
+    "start": 29.449999,
+    "end": 31.609999,
+    "speaker_id": "S6",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-8_1",
+    "text": "Let us check the opening hours first.",
+    "start": 31.849998,
+    "end": 33.69,
+    "speaker_id": "S4",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-9",
+    "text": "I think they close at five.",
+    "start": 34.03,
+    "end": 35.87,
+    "speaker_id": "S4",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-10",
+    "text": "I can look it up right now on my phone.",
+    "start": 35.87,
+    "end": 37.949997,
+    "speaker_id": "S3",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-11",
+    "text": "While you do that, could someone please pass the sugar? Here you go.",
+    "start": 38.489998,
+    "end": 42.649998,
+    "speaker_id": "S5",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-12",
+    "text": "So is Saturday afternoon good for everybody? Saturday works for me.",
+    "start": 43.079998,
+    "end": 47.32,
+    "speaker_id": "S6",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-13",
+    "text": "As long as we leave there for four.",
+    "start": 47.58,
+    "end": 49.579998,
+    "speaker_id": "S4",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-14",
+    "text": "They are open until six.",
+    "start": 49.58,
+    "end": 50.94,
+    "speaker_id": "S3",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-15",
+    "text": "So that should be fine for all of us.",
+    "start": 51.390003,
+    "end": 53.550003,
+    "speaker_id": "S3",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-16",
+    "text": "Great. Then it is set I will book four tickets tonight.",
+    "start": 53.79,
+    "end": 57.72,
+    "speaker_id": "S5",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   }
+  ],
+  "hyp": "Okay, everyone. What are we ordering to today? I will have a flat white and a blueberry muffin, please. Just a black tea for me. Can you? Can I get an iced latte with oatmeal and two shots? And I will take a cappuccino. Does anyone want to share a croissant? Yes. I would love half of one, but only i",
+  "speaker_acc": 0.5238095238095238,
+  "confident_wrong": 2,
+  "label_flips": 2,
+  "uncertain": 8,
+  "n_scored": 21,
+  "labels_used": 6,
+  "true_speakers": 4,
+  "names": [],
+  "suggestions": [],
+  "overlap_groups": 2,
+  "separated_utts": 4,
+  "directions": [],
+  "status": [
+   "reconnecting",
+   "deepgram"
+  ],
+  "errors": [],
+  "first_word_ms_after_word_ends": 1034,
+  "final_lag_ms_median": 3103
+ },
+ {
+  "id": "overlap_2spk_2s",
+  "clip": "overlap_2spk_2s",
+  "group": "R2 demanding (overlap)",
+  "expect": "both speakers' sentences shown, same overlap_group",
+  "wall_s": 20.6,
+  "returncode": 0,
+  "finals": 3,
+  "wer": 0.2413793103448276,
+  "recall_live": 0.7931034482758621,
+  "recall_all": 0.9655172413793104,
+  "finals_raw": [
+   {
+    "id": "u_d1-0",
+    "text": "I think we should meet at the main entrance The delivery is from the warehouse is expected on Thursday morning before the shop opens.",
+    "start": 0.48,
+    "end": 7.05,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": "og_u_d1-0"
+   },
+   {
+    "id": "u_d1-0_s0",
+    "text": "Delivery from the warehouse is expected",
+    "start": 2.548,
+    "end": 4.508,
+    "speaker_id": "S1",
+    "speaker_uncertain": true,
+    "source": "separated",
+    "overlap_group": "og_u_d1-0"
+   },
+   {
+    "id": "u_d1-0_s1",
+    "text": "At the station around noon tomorrow",
+    "start": 2.548,
+    "end": 4.508,
+    "speaker_id": "UNKNOWN",
+    "speaker_uncertain": true,
+    "source": "separated",
+    "overlap_group": "og_u_d1-0"
+   }
+  ],
+  "hyp": "I think we should meet at the main entrance The delivery is from the warehouse is expected on Thursday morning before the shop opens.",
+  "speaker_acc": 1.0,
+  "confident_wrong": 0,
+  "label_flips": 0,
+  "uncertain": 0,
+  "n_scored": 1,
+  "labels_used": 1,
+  "true_speakers": 1,
+  "names": [],
+  "suggestions": [],
+  "overlap_groups": 1,
+  "separated_utts": 2,
+  "directions": [],
+  "status": [
+   "reconnecting",
+   "deepgram"
+  ],
+  "errors": [],
+  "first_word_ms_after_word_ends": 503,
+  "final_lag_ms_median": 5608
+ },
+ {
+  "id": "fail_bad_deepgram_key",
+  "clip": "turns_2spk",
+  "group": "R3 failure 1a: ASR service unavailable",
+  "expect": "status goes local, captions still appear (WER near normal)",
+  "wall_s": 44.9,
+  "returncode": 0,
+  "finals": 8,
+  "wer": 0.0,
+  "recall_live": 1.0,
+  "recall_all": 1.0,
+  "finals_raw": [
+   {
+    "id": "u_l1-0",
+    "text": "Hi, did you manage to find the restaurant okay?",
+    "start": 0.48,
+    "end": 3.92,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-1",
+    "text": "Yes, it was easy. The bus stops right outside the door.",
+    "start": 4.064,
+    "end": 8.064,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-2",
+    "text": "Great, I booked a table for 7.30, so we have a little time.",
+    "start": 8.192,
+    "end": 12.352,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-3",
+    "text": "Perfect. Should we order a starter to share while we wait?",
+    "start": 12.544,
+    "end": 15.904,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-4",
+    "text": "Good idea, I heard the mushroom soup here is excellent.",
+    "start": 16.288,
+    "end": 19.328,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-5",
+    "text": "Then I will have the soup, and maybe a green salad on the side.",
+    "start": 19.424,
+    "end": 23.184,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-6",
+    "text": "Sounds good, I will ask the waiter to bring two glasses of water.",
+    "start": 23.264,
+    "end": 27.024,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-7",
+    "text": "Thank you, by the way, did you get my message about Friday?",
+    "start": 27.168,
+    "end": 31.247999999999998,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   }
+  ],
+  "hyp": "Hi, did you manage to find the restaurant okay? Yes, it was easy. The bus stops right outside the door. Great, I booked a table for 7.30, so we have a little time. Perfect. Should we order a starter to share while we wait? Good idea, I heard the mushroom soup here is excellent. Then I will have the ",
+  "speaker_acc": 1.0,
+  "confident_wrong": 0,
+  "label_flips": 0,
+  "uncertain": 0,
+  "n_scored": 8,
+  "labels_used": 2,
+  "true_speakers": 2,
+  "names": [],
+  "suggestions": [],
+  "overlap_groups": 0,
+  "separated_utts": 0,
+  "directions": [],
+  "status": [
+   "reconnecting",
+   "reconnecting",
+   "local"
+  ],
+  "errors": [],
+  "first_word_ms_after_word_ends": 2512,
+  "final_lag_ms_median": 307
+ },
+ {
+  "id": "fail_deepgram_dropped_mid_stream",
+  "clip": "turns_2spk",
+  "group": "R3 failure 1b: connection lost mid-stream",
+  "expect": "status reconnecting -> local, no gap in captions",
+  "wall_s": 44.8,
+  "returncode": 0,
+  "finals": 9,
+  "wer": 0.0,
+  "recall_live": 1.0,
+  "recall_all": 1.0,
+  "finals_raw": [
+   {
+    "id": "u_d1-0",
+    "text": "Hi. Did you manage to find the restaurant okay?",
+    "start": 0.71999997,
+    "end": 3.6,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-1",
+    "text": "Yes, it was easy. The bus stops right outside the door.",
+    "start": 4.0,
+    "end": 8.0,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-1",
+    "text": "Great, I booked a table for 7.30, so we have a little time.",
+    "start": 8.192,
+    "end": 12.352,
+    "speaker_id": "S1",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-2",
+    "text": "Perfect. Should we order a starter to share while we wait?",
+    "start": 12.544,
+    "end": 15.904,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_l1-3",
+    "text": "Good idea.",
+    "start": 16.128,
+    "end": 16.368,
+    "speaker_id": "UNKNOWN",
+    "speaker_uncertain": true,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d2-0",
+    "text": "I heard the mushroom soup here is excellent. Then I will have the soup.",
+    "start": 16.5,
+    "end": 20.58,
+    "speaker_id": "S3",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d2-1",
+    "text": "And maybe a green salad on the side. Sounds good.",
+    "start": 20.69,
+    "end": 23.81,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d2-2",
+    "text": "I will ask the waiter to bring two glasses of water. Thank you.",
+    "start": 24.04,
+    "end": 27.959999,
+    "speaker_id": "S3",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d2-2_1",
+    "text": "By the way, did you get my message about Friday?",
+    "start": 28.04,
+    "end": 30.96,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   }
+  ],
+  "hyp": "Hi. Did you manage to find the restaurant okay? Yes, it was easy. The bus stops right outside the door. Great, I booked a table for 7.30, so we have a little time. Perfect. Should we order a starter to share while we wait? Good idea. I heard the mushroom soup here is excellent. Then I will have the ",
+  "speaker_acc": 0.6666666666666666,
+  "confident_wrong": 1,
+  "label_flips": 1,
+  "uncertain": 2,
+  "n_scored": 9,
+  "labels_used": 4,
+  "true_speakers": 2,
+  "names": [],
+  "suggestions": [],
+  "overlap_groups": 0,
+  "separated_utts": 0,
+  "directions": [],
+  "status": [
+   "reconnecting",
+   "deepgram",
+   "reconnecting",
+   "local",
+   "deepgram"
+  ],
+  "errors": [],
+  "first_word_ms_after_word_ends": 259,
+  "final_lag_ms_median": 1000
+ },
+ {
+  "id": "fail_mono_mic_dupmono",
+  "clip": "stereo_dupmono",
+  "group": "R3 failure 2: phone gives duplicated mono",
+  "expect": "no direction invented (direction_deg null), no crash",
+  "wall_s": 44.1,
+  "returncode": 0,
+  "finals": 8,
+  "wer": 0.0,
+  "recall_live": 1.0,
+  "recall_all": 1.0,
+  "finals_raw": [
+   {
+    "id": "u_d1-0",
+    "text": "Hi. Did you manage to find the restaurant okay?",
+    "start": 0.71999997,
+    "end": 3.6,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-1",
+    "text": "Yes. It was easy. The bus stops right outside the door.",
+    "start": 4.0,
+    "end": 7.6800003,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-2",
+    "text": "Great. I booked a table for 07:30, so we have a little time.",
+    "start": 8.1,
+    "end": 12.02,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-3",
+    "text": "Perfect. Should we order a starter to share while we wait?",
+    "start": 12.47,
+    "end": 15.67,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-4",
+    "text": "Good idea. I heard the mushroom soup here is excellent.",
+    "start": 16.06,
+    "end": 18.939999,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-5",
+    "text": "Then I will have the soup and maybe a green salad on the side.",
+    "start": 19.43,
+    "end": 22.79,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-6",
+    "text": "Sounds good. I will ask the waiter to bring two glasses of water.",
+    "start": 23.18,
+    "end": 26.7,
+    "speaker_id": "S1",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   },
+   {
+    "id": "u_d1-7",
+    "text": "Thank you. By the way, did you get my message about Friday?",
+    "start": 27.1,
+    "end": 30.94,
+    "speaker_id": "S2",
+    "speaker_uncertain": false,
+    "source": "live",
+    "overlap_group": null
+   }
+  ],
+  "hyp": "Hi. Did you manage to find the restaurant okay? Yes. It was easy. The bus stops right outside the door. Great. I booked a table for 07:30, so we have a little time. Perfect. Should we order a starter to share while we wait? Good idea. I heard the mushroom soup here is excellent. Then I will have the",
+  "speaker_acc": 1.0,
+  "confident_wrong": 0,
+  "label_flips": 0,
+  "uncertain": 0,
+  "n_scored": 8,
+  "labels_used": 2,
+  "true_speakers": 2,
+  "names": [],
+  "suggestions": [],
+  "overlap_groups": 0,
+  "separated_utts": 0,
+  "directions": [],
+  "status": [
+   "reconnecting",
+   "deepgram"
+  ],
+  "errors": [],
+  "first_word_ms_after_word_ends": 295,
+  "final_lag_ms_median": 1562
+ }
+]
