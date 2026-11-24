@@ -1,0 +1,1110 @@
+{
+ "_readme": "ALL CLIPS ARE SYNTHETIC: macOS `say` text-to-speech voices, mixed by backend/scripts/make_clips.py. No real people, no real recordings. Times are seconds from clip start. Paths relative to eval/clips/. Wavs are gitignored; regenerate with `cd backend && uv run python scripts/make_clips.py`.",
+ "synthetic": true,
+ "sample_rate": 16000,
+ "generator": "backend/scripts/make_clips.py",
+ "voices": {
+  "A": "Samantha",
+  "B": "Daniel",
+  "C": "Karen",
+  "D": "Rishi",
+  "E": "Tessa",
+  "F": "Fred",
+  "S": "Moira",
+  "M": "Rishi"
+ },
+ "clips": [
+  {
+   "id": "turns_2spk",
+   "file": "turns_2spk.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 31.49,
+   "kind": "turn_taking",
+   "description": "2 speakers, clean turn-taking, no overlap (ordinary case 1)",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel"
+   },
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "Hi, did you manage to find the restaurant okay?",
+     "start": 0.75,
+     "end": 3.736
+    },
+    {
+     "speaker": "B",
+     "text": "Yes, it was easy. The bus stops right outside the door.",
+     "start": 4.086,
+     "end": 7.848
+    },
+    {
+     "speaker": "A",
+     "text": "Great. I booked a table for seven thirty, so we have a little time.",
+     "start": 8.198,
+     "end": 12.204
+    },
+    {
+     "speaker": "B",
+     "text": "Perfect. Should we order a starter to share while we wait?",
+     "start": 12.554,
+     "end": 15.795
+    },
+    {
+     "speaker": "A",
+     "text": "Good idea. I heard the mushroom soup here is excellent.",
+     "start": 16.145,
+     "end": 19.109
+    },
+    {
+     "speaker": "B",
+     "text": "Then I will have the soup, and maybe a green salad on the side.",
+     "start": 19.459,
+     "end": 22.919
+    },
+    {
+     "speaker": "A",
+     "text": "Sounds good. I will ask the waiter to bring two glasses of water.",
+     "start": 23.269,
+     "end": 26.825
+    },
+    {
+     "speaker": "B",
+     "text": "Thank you. By the way, did you get my message about Friday?",
+     "start": 27.175,
+     "end": 31.091
+    }
+   ],
+   "overlaps": [],
+   "reference_text": "Hi, did you manage to find the restaurant okay? Yes, it was easy. The bus stops right outside the door. Great. I booked a table for seven thirty, so we have a little time. Perfect. Should we order a starter to share while we wait? Good idea. I heard the mushroom soup here is excellent. Then I will have the soup, and maybe a green salad on the side. Sounds good. I will ask the waiter to bring two glasses of water. Thank you. By the way, did you get my message about Friday?"
+  },
+  {
+   "id": "cafe_4spk",
+   "file": "cafe_4spk.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 58.16,
+   "kind": "multi_speaker",
+   "description": "4 speakers, cafe-style, one interruption (D cuts in on B)",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel",
+    "C": "Karen",
+    "D": "Rishi"
+   },
+   "interruptions": [
+    {
+     "interrupter": "D",
+     "interrupted": "B"
+    }
+   ],
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "Okay everyone, what are we ordering today?",
+     "start": 0.75,
+     "end": 3.33
+    },
+    {
+     "speaker": "B",
+     "text": "I will have a flat white and a blueberry muffin, please.",
+     "start": 3.68,
+     "end": 6.778
+    },
+    {
+     "speaker": "C",
+     "text": "Just a black tea for me, thank you.",
+     "start": 7.128,
+     "end": 9.423
+    },
+    {
+     "speaker": "D",
+     "text": "Can I get an iced latte with oat milk and two shots?",
+     "start": 9.773,
+     "end": 13.013
+    },
+    {
+     "speaker": "A",
+     "text": "And I will take a cappuccino. Does anyone want to share a croissant?",
+     "start": 13.363,
+     "end": 17.207
+    },
+    {
+     "speaker": "C",
+     "text": "Yes, I would love half of one, but only if it is warm.",
+     "start": 17.507,
+     "end": 20.887
+    },
+    {
+     "speaker": "B",
+     "text": "Did you all see the new exhibition that opens on Saturday at the museum?",
+     "start": 21.387,
+     "end": 25.298
+    },
+    {
+     "speaker": "D",
+     "text": "Not yet, I heard the tickets cost twenty five dollars each.",
+     "start": 23.998,
+     "end": 27.774,
+     "note": "interrupts previous speaker (starts ~1.3 s before B finishes)"
+    },
+    {
+     "speaker": "A",
+     "text": "That seems like a lot, but I would still go if we went together.",
+     "start": 28.124,
+     "end": 31.438
+    },
+    {
+     "speaker": "C",
+     "text": "Let us check the opening hours first. I think they close at five.",
+     "start": 31.788,
+     "end": 35.634
+    },
+    {
+     "speaker": "B",
+     "text": "I can look it up right now on my phone.",
+     "start": 35.884,
+     "end": 38.12
+    },
+    {
+     "speaker": "D",
+     "text": "While you do that, could someone please pass the sugar?",
+     "start": 38.47,
+     "end": 41.754
+    },
+    {
+     "speaker": "A",
+     "text": "Here you go. So, is Saturday afternoon good for everybody?",
+     "start": 42.104,
+     "end": 45.797
+    },
+    {
+     "speaker": "C",
+     "text": "Saturday works for me, as long as we leave before four.",
+     "start": 46.147,
+     "end": 49.312
+    },
+    {
+     "speaker": "B",
+     "text": "They are open until six, so that should be fine for all of us.",
+     "start": 49.662,
+     "end": 53.47
+    },
+    {
+     "speaker": "D",
+     "text": "Great, then it is settled. I will book four tickets tonight.",
+     "start": 53.82,
+     "end": 57.764
+    }
+   ],
+   "overlaps": [
+    {
+     "start": 23.998,
+     "end": 25.298,
+     "speakers": [
+      "B",
+      "D"
+     ]
+    }
+   ],
+   "reference_text": "Okay everyone, what are we ordering today? I will have a flat white and a blueberry muffin, please. Just a black tea for me, thank you. Can I get an iced latte with oat milk and two shots? And I will take a cappuccino. Does anyone want to share a croissant? Yes, I would love half of one, but only if it is warm. Did you all see the new exhibition that opens on Saturday at the museum? Not yet, I heard the tickets cost twenty five dollars each. That seems like a lot, but I would still go if we went together. Let us check the opening hours first. I think they close at five. I can look it up right now on my phone. While you do that, could someone please pass the sugar? Here you go. So, is Saturday afternoon good for everybody? Saturday works for me, as long as we leave before four. They are open until six, so that should be fine for all of us. Great, then it is settled. I will book four tickets tonight."
+  },
+  {
+   "id": "overlap_2spk_1s",
+   "file": "overlap_2spk_1s.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 8.72,
+   "kind": "overlap",
+   "overlap_s": 1.0,
+   "description": "A and B talk simultaneously for 1 s (2 voices; stems provided for SI-SDR)",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel"
+   },
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "I think we should meet at the main entrance of the station around noon tomorrow.",
+     "start": 0.75,
+     "end": 4.361
+    },
+    {
+     "speaker": "B",
+     "text": "The delivery from the warehouse is expected on Thursday morning, before the shop opens.",
+     "start": 3.361,
+     "end": 8.325
+    }
+   ],
+   "overlaps": [
+    {
+     "start": 3.361,
+     "end": 4.361,
+     "speakers": [
+      "A",
+      "B"
+     ]
+    }
+   ],
+   "reference_text": "I think we should meet at the main entrance of the station around noon tomorrow. The delivery from the warehouse is expected on Thursday morning, before the shop opens.",
+   "stems": {
+    "A": "stems/overlap_2spk_1s__A.wav",
+    "B": "stems/overlap_2spk_1s__B.wav"
+   }
+  },
+  {
+   "id": "overlap_2spk_2s",
+   "file": "overlap_2spk_2s.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 7.72,
+   "kind": "overlap",
+   "overlap_s": 2.0,
+   "description": "A and B talk simultaneously for 2 s (2 voices; stems provided for SI-SDR)",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel"
+   },
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "I think we should meet at the main entrance of the station around noon tomorrow.",
+     "start": 0.75,
+     "end": 4.361
+    },
+    {
+     "speaker": "B",
+     "text": "The delivery from the warehouse is expected on Thursday morning, before the shop opens.",
+     "start": 2.361,
+     "end": 7.325
+    }
+   ],
+   "overlaps": [
+    {
+     "start": 2.361,
+     "end": 4.361,
+     "speakers": [
+      "A",
+      "B"
+     ]
+    }
+   ],
+   "reference_text": "I think we should meet at the main entrance of the station around noon tomorrow. The delivery from the warehouse is expected on Thursday morning, before the shop opens.",
+   "stems": {
+    "A": "stems/overlap_2spk_2s__A.wav",
+    "B": "stems/overlap_2spk_2s__B.wav"
+   }
+  },
+  {
+   "id": "overlap_2spk_3s",
+   "file": "overlap_2spk_3s.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 6.72,
+   "kind": "overlap",
+   "overlap_s": 3.0,
+   "description": "A and B talk simultaneously for 3 s (2 voices; stems provided for SI-SDR)",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel"
+   },
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "I think we should meet at the main entrance of the station around noon tomorrow.",
+     "start": 0.75,
+     "end": 4.361
+    },
+    {
+     "speaker": "B",
+     "text": "The delivery from the warehouse is expected on Thursday morning, before the shop opens.",
+     "start": 1.361,
+     "end": 6.325
+    }
+   ],
+   "overlaps": [
+    {
+     "start": 1.361,
+     "end": 4.361,
+     "speakers": [
+      "A",
+      "B"
+     ]
+    }
+   ],
+   "reference_text": "I think we should meet at the main entrance of the station around noon tomorrow. The delivery from the warehouse is expected on Thursday morning, before the shop opens.",
+   "stems": {
+    "A": "stems/overlap_2spk_3s__A.wav",
+    "B": "stems/overlap_2spk_3s__B.wav"
+   }
+  },
+  {
+   "id": "overlap_2spk_2s_samegender",
+   "file": "overlap_2spk_2s_samegender.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 8.23,
+   "kind": "overlap",
+   "overlap_s": 2.0,
+   "description": "two female voices overlap 2 s (harder to separate)",
+   "speakers": {
+    "A": "Samantha",
+    "E": "Tessa"
+   },
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "I think we should meet at the main entrance of the station around noon tomorrow.",
+     "start": 0.75,
+     "end": 4.361
+    },
+    {
+     "speaker": "E",
+     "text": "My flight lands at nine fifteen, so I will take a taxi straight to the hotel.",
+     "start": 2.361,
+     "end": 7.832
+    }
+   ],
+   "overlaps": [
+    {
+     "start": 2.361,
+     "end": 4.361,
+     "speakers": [
+      "A",
+      "E"
+     ]
+    }
+   ],
+   "reference_text": "I think we should meet at the main entrance of the station around noon tomorrow. My flight lands at nine fifteen, so I will take a taxi straight to the hotel.",
+   "stems": {
+    "A": "stems/overlap_2spk_2s_samegender__A.wav",
+    "E": "stems/overlap_2spk_2s_samegender__E.wav"
+   }
+  },
+  {
+   "id": "noisy_cafe_babble_snr10",
+   "file": "noisy_cafe_babble_snr10.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 58.16,
+   "kind": "noisy",
+   "noise": "babble (5 unrelated TTS voices)",
+   "snr_db": 10,
+   "description": "cafe_4spk + babble noise at 10 dB SNR (SNR on speech-active frames)",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel",
+    "C": "Karen",
+    "D": "Rishi"
+   },
+   "base_clip": "cafe_4spk",
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "Okay everyone, what are we ordering today?",
+     "start": 0.75,
+     "end": 3.33
+    },
+    {
+     "speaker": "B",
+     "text": "I will have a flat white and a blueberry muffin, please.",
+     "start": 3.68,
+     "end": 6.778
+    },
+    {
+     "speaker": "C",
+     "text": "Just a black tea for me, thank you.",
+     "start": 7.128,
+     "end": 9.423
+    },
+    {
+     "speaker": "D",
+     "text": "Can I get an iced latte with oat milk and two shots?",
+     "start": 9.773,
+     "end": 13.013
+    },
+    {
+     "speaker": "A",
+     "text": "And I will take a cappuccino. Does anyone want to share a croissant?",
+     "start": 13.363,
+     "end": 17.207
+    },
+    {
+     "speaker": "C",
+     "text": "Yes, I would love half of one, but only if it is warm.",
+     "start": 17.507,
+     "end": 20.887
+    },
+    {
+     "speaker": "B",
+     "text": "Did you all see the new exhibition that opens on Saturday at the museum?",
+     "start": 21.387,
+     "end": 25.298
+    },
+    {
+     "speaker": "D",
+     "text": "Not yet, I heard the tickets cost twenty five dollars each.",
+     "start": 23.998,
+     "end": 27.774,
+     "note": "interrupts previous speaker (starts ~1.3 s before B finishes)"
+    },
+    {
+     "speaker": "A",
+     "text": "That seems like a lot, but I would still go if we went together.",
+     "start": 28.124,
+     "end": 31.438
+    },
+    {
+     "speaker": "C",
+     "text": "Let us check the opening hours first. I think they close at five.",
+     "start": 31.788,
+     "end": 35.634
+    },
+    {
+     "speaker": "B",
+     "text": "I can look it up right now on my phone.",
+     "start": 35.884,
+     "end": 38.12
+    },
+    {
+     "speaker": "D",
+     "text": "While you do that, could someone please pass the sugar?",
+     "start": 38.47,
+     "end": 41.754
+    },
+    {
+     "speaker": "A",
+     "text": "Here you go. So, is Saturday afternoon good for everybody?",
+     "start": 42.104,
+     "end": 45.797
+    },
+    {
+     "speaker": "C",
+     "text": "Saturday works for me, as long as we leave before four.",
+     "start": 46.147,
+     "end": 49.312
+    },
+    {
+     "speaker": "B",
+     "text": "They are open until six, so that should be fine for all of us.",
+     "start": 49.662,
+     "end": 53.47
+    },
+    {
+     "speaker": "D",
+     "text": "Great, then it is settled. I will book four tickets tonight.",
+     "start": 53.82,
+     "end": 57.764
+    }
+   ],
+   "overlaps": [
+    {
+     "start": 23.998,
+     "end": 25.298,
+     "speakers": [
+      "B",
+      "D"
+     ]
+    }
+   ],
+   "reference_text": "Okay everyone, what are we ordering today? I will have a flat white and a blueberry muffin, please. Just a black tea for me, thank you. Can I get an iced latte with oat milk and two shots? And I will take a cappuccino. Does anyone want to share a croissant? Yes, I would love half of one, but only if it is warm. Did you all see the new exhibition that opens on Saturday at the museum? Not yet, I heard the tickets cost twenty five dollars each. That seems like a lot, but I would still go if we went together. Let us check the opening hours first. I think they close at five. I can look it up right now on my phone. While you do that, could someone please pass the sugar? Here you go. So, is Saturday afternoon good for everybody? Saturday works for me, as long as we leave before four. They are open until six, so that should be fine for all of us. Great, then it is settled. I will book four tickets tonight."
+  },
+  {
+   "id": "noisy_cafe_babble_snr5",
+   "file": "noisy_cafe_babble_snr5.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 58.16,
+   "kind": "noisy",
+   "noise": "babble (5 unrelated TTS voices)",
+   "snr_db": 5,
+   "description": "cafe_4spk + babble noise at 5 dB SNR (SNR on speech-active frames)",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel",
+    "C": "Karen",
+    "D": "Rishi"
+   },
+   "base_clip": "cafe_4spk",
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "Okay everyone, what are we ordering today?",
+     "start": 0.75,
+     "end": 3.33
+    },
+    {
+     "speaker": "B",
+     "text": "I will have a flat white and a blueberry muffin, please.",
+     "start": 3.68,
+     "end": 6.778
+    },
+    {
+     "speaker": "C",
+     "text": "Just a black tea for me, thank you.",
+     "start": 7.128,
+     "end": 9.423
+    },
+    {
+     "speaker": "D",
+     "text": "Can I get an iced latte with oat milk and two shots?",
+     "start": 9.773,
+     "end": 13.013
+    },
+    {
+     "speaker": "A",
+     "text": "And I will take a cappuccino. Does anyone want to share a croissant?",
+     "start": 13.363,
+     "end": 17.207
+    },
+    {
+     "speaker": "C",
+     "text": "Yes, I would love half of one, but only if it is warm.",
+     "start": 17.507,
+     "end": 20.887
+    },
+    {
+     "speaker": "B",
+     "text": "Did you all see the new exhibition that opens on Saturday at the museum?",
+     "start": 21.387,
+     "end": 25.298
+    },
+    {
+     "speaker": "D",
+     "text": "Not yet, I heard the tickets cost twenty five dollars each.",
+     "start": 23.998,
+     "end": 27.774,
+     "note": "interrupts previous speaker (starts ~1.3 s before B finishes)"
+    },
+    {
+     "speaker": "A",
+     "text": "That seems like a lot, but I would still go if we went together.",
+     "start": 28.124,
+     "end": 31.438
+    },
+    {
+     "speaker": "C",
+     "text": "Let us check the opening hours first. I think they close at five.",
+     "start": 31.788,
+     "end": 35.634
+    },
+    {
+     "speaker": "B",
+     "text": "I can look it up right now on my phone.",
+     "start": 35.884,
+     "end": 38.12
+    },
+    {
+     "speaker": "D",
+     "text": "While you do that, could someone please pass the sugar?",
+     "start": 38.47,
+     "end": 41.754
+    },
+    {
+     "speaker": "A",
+     "text": "Here you go. So, is Saturday afternoon good for everybody?",
+     "start": 42.104,
+     "end": 45.797
+    },
+    {
+     "speaker": "C",
+     "text": "Saturday works for me, as long as we leave before four.",
+     "start": 46.147,
+     "end": 49.312
+    },
+    {
+     "speaker": "B",
+     "text": "They are open until six, so that should be fine for all of us.",
+     "start": 49.662,
+     "end": 53.47
+    },
+    {
+     "speaker": "D",
+     "text": "Great, then it is settled. I will book four tickets tonight.",
+     "start": 53.82,
+     "end": 57.764
+    }
+   ],
+   "overlaps": [
+    {
+     "start": 23.998,
+     "end": 25.298,
+     "speakers": [
+      "B",
+      "D"
+     ]
+    }
+   ],
+   "reference_text": "Okay everyone, what are we ordering today? I will have a flat white and a blueberry muffin, please. Just a black tea for me, thank you. Can I get an iced latte with oat milk and two shots? And I will take a cappuccino. Does anyone want to share a croissant? Yes, I would love half of one, but only if it is warm. Did you all see the new exhibition that opens on Saturday at the museum? Not yet, I heard the tickets cost twenty five dollars each. That seems like a lot, but I would still go if we went together. Let us check the opening hours first. I think they close at five. I can look it up right now on my phone. While you do that, could someone please pass the sugar? Here you go. So, is Saturday afternoon good for everybody? Saturday works for me, as long as we leave before four. They are open until six, so that should be fine for all of us. Great, then it is settled. I will book four tickets tonight."
+  },
+  {
+   "id": "noisy_turns_pink_snr10",
+   "file": "noisy_turns_pink_snr10.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 31.49,
+   "kind": "noisy",
+   "noise": "pink noise",
+   "snr_db": 10,
+   "description": "turns_2spk + pink noise at 10 dB SNR",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel"
+   },
+   "base_clip": "turns_2spk",
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "Hi, did you manage to find the restaurant okay?",
+     "start": 0.75,
+     "end": 3.736
+    },
+    {
+     "speaker": "B",
+     "text": "Yes, it was easy. The bus stops right outside the door.",
+     "start": 4.086,
+     "end": 7.848
+    },
+    {
+     "speaker": "A",
+     "text": "Great. I booked a table for seven thirty, so we have a little time.",
+     "start": 8.198,
+     "end": 12.204
+    },
+    {
+     "speaker": "B",
+     "text": "Perfect. Should we order a starter to share while we wait?",
+     "start": 12.554,
+     "end": 15.795
+    },
+    {
+     "speaker": "A",
+     "text": "Good idea. I heard the mushroom soup here is excellent.",
+     "start": 16.145,
+     "end": 19.109
+    },
+    {
+     "speaker": "B",
+     "text": "Then I will have the soup, and maybe a green salad on the side.",
+     "start": 19.459,
+     "end": 22.919
+    },
+    {
+     "speaker": "A",
+     "text": "Sounds good. I will ask the waiter to bring two glasses of water.",
+     "start": 23.269,
+     "end": 26.825
+    },
+    {
+     "speaker": "B",
+     "text": "Thank you. By the way, did you get my message about Friday?",
+     "start": 27.175,
+     "end": 31.091
+    }
+   ],
+   "overlaps": [],
+   "reference_text": "Hi, did you manage to find the restaurant okay? Yes, it was easy. The bus stops right outside the door. Great. I booked a table for seven thirty, so we have a little time. Perfect. Should we order a starter to share while we wait? Good idea. I heard the mushroom soup here is excellent. Then I will have the soup, and maybe a green salad on the side. Sounds good. I will ask the waiter to bring two glasses of water. Thank you. By the way, did you get my message about Friday?"
+  },
+  {
+   "id": "stereo_2spk_lr",
+   "file": "stereo_2spk_lr.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 2,
+   "duration_s": 31.49,
+   "kind": "stereo_doa",
+   "mic_spacing_m": 0.14,
+   "speed_of_sound": 343.0,
+   "angles_deg": {
+    "A": -60.0,
+    "B": 60.0
+   },
+   "convention": "ch0=left mic, ch1=right mic; +deg = source on RIGHT; left channel delayed for right sources (ITD only, no level difference)",
+   "description": "turns_2spk with A at -60 deg (left) and B at +60 deg (right)",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel"
+   },
+   "base_clip": "turns_2spk",
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "Hi, did you manage to find the restaurant okay?",
+     "start": 0.75,
+     "end": 3.736
+    },
+    {
+     "speaker": "B",
+     "text": "Yes, it was easy. The bus stops right outside the door.",
+     "start": 4.086,
+     "end": 7.848
+    },
+    {
+     "speaker": "A",
+     "text": "Great. I booked a table for seven thirty, so we have a little time.",
+     "start": 8.198,
+     "end": 12.204
+    },
+    {
+     "speaker": "B",
+     "text": "Perfect. Should we order a starter to share while we wait?",
+     "start": 12.554,
+     "end": 15.795
+    },
+    {
+     "speaker": "A",
+     "text": "Good idea. I heard the mushroom soup here is excellent.",
+     "start": 16.145,
+     "end": 19.109
+    },
+    {
+     "speaker": "B",
+     "text": "Then I will have the soup, and maybe a green salad on the side.",
+     "start": 19.459,
+     "end": 22.919
+    },
+    {
+     "speaker": "A",
+     "text": "Sounds good. I will ask the waiter to bring two glasses of water.",
+     "start": 23.269,
+     "end": 26.825
+    },
+    {
+     "speaker": "B",
+     "text": "Thank you. By the way, did you get my message about Friday?",
+     "start": 27.175,
+     "end": 31.091
+    }
+   ],
+   "overlaps": [],
+   "reference_text": "Hi, did you manage to find the restaurant okay? Yes, it was easy. The bus stops right outside the door. Great. I booked a table for seven thirty, so we have a little time. Perfect. Should we order a starter to share while we wait? Good idea. I heard the mushroom soup here is excellent. Then I will have the soup, and maybe a green salad on the side. Sounds good. I will ask the waiter to bring two glasses of water. Thank you. By the way, did you get my message about Friday?"
+  },
+  {
+   "id": "stereo_cafe_4spk",
+   "file": "stereo_cafe_4spk.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 2,
+   "duration_s": 58.16,
+   "kind": "stereo_doa",
+   "mic_spacing_m": 0.14,
+   "speed_of_sound": 343.0,
+   "angles_deg": {
+    "A": -75.0,
+    "B": -25.0,
+    "C": 25.0,
+    "D": 75.0
+   },
+   "convention": "same as stereo_2spk_lr",
+   "description": "cafe_4spk with 4 speakers at -75/-25/+25/+75 deg",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel",
+    "C": "Karen",
+    "D": "Rishi"
+   },
+   "base_clip": "cafe_4spk",
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "Okay everyone, what are we ordering today?",
+     "start": 0.75,
+     "end": 3.33
+    },
+    {
+     "speaker": "B",
+     "text": "I will have a flat white and a blueberry muffin, please.",
+     "start": 3.68,
+     "end": 6.778
+    },
+    {
+     "speaker": "C",
+     "text": "Just a black tea for me, thank you.",
+     "start": 7.128,
+     "end": 9.423
+    },
+    {
+     "speaker": "D",
+     "text": "Can I get an iced latte with oat milk and two shots?",
+     "start": 9.773,
+     "end": 13.013
+    },
+    {
+     "speaker": "A",
+     "text": "And I will take a cappuccino. Does anyone want to share a croissant?",
+     "start": 13.363,
+     "end": 17.207
+    },
+    {
+     "speaker": "C",
+     "text": "Yes, I would love half of one, but only if it is warm.",
+     "start": 17.507,
+     "end": 20.887
+    },
+    {
+     "speaker": "B",
+     "text": "Did you all see the new exhibition that opens on Saturday at the museum?",
+     "start": 21.387,
+     "end": 25.298
+    },
+    {
+     "speaker": "D",
+     "text": "Not yet, I heard the tickets cost twenty five dollars each.",
+     "start": 23.998,
+     "end": 27.774,
+     "note": "interrupts previous speaker (starts ~1.3 s before B finishes)"
+    },
+    {
+     "speaker": "A",
+     "text": "That seems like a lot, but I would still go if we went together.",
+     "start": 28.124,
+     "end": 31.438
+    },
+    {
+     "speaker": "C",
+     "text": "Let us check the opening hours first. I think they close at five.",
+     "start": 31.788,
+     "end": 35.634
+    },
+    {
+     "speaker": "B",
+     "text": "I can look it up right now on my phone.",
+     "start": 35.884,
+     "end": 38.12
+    },
+    {
+     "speaker": "D",
+     "text": "While you do that, could someone please pass the sugar?",
+     "start": 38.47,
+     "end": 41.754
+    },
+    {
+     "speaker": "A",
+     "text": "Here you go. So, is Saturday afternoon good for everybody?",
+     "start": 42.104,
+     "end": 45.797
+    },
+    {
+     "speaker": "C",
+     "text": "Saturday works for me, as long as we leave before four.",
+     "start": 46.147,
+     "end": 49.312
+    },
+    {
+     "speaker": "B",
+     "text": "They are open until six, so that should be fine for all of us.",
+     "start": 49.662,
+     "end": 53.47
+    },
+    {
+     "speaker": "D",
+     "text": "Great, then it is settled. I will book four tickets tonight.",
+     "start": 53.82,
+     "end": 57.764
+    }
+   ],
+   "overlaps": [
+    {
+     "start": 23.998,
+     "end": 25.298,
+     "speakers": [
+      "B",
+      "D"
+     ]
+    }
+   ],
+   "reference_text": "Okay everyone, what are we ordering today? I will have a flat white and a blueberry muffin, please. Just a black tea for me, thank you. Can I get an iced latte with oat milk and two shots? And I will take a cappuccino. Does anyone want to share a croissant? Yes, I would love half of one, but only if it is warm. Did you all see the new exhibition that opens on Saturday at the museum? Not yet, I heard the tickets cost twenty five dollars each. That seems like a lot, but I would still go if we went together. Let us check the opening hours first. I think they close at five. I can look it up right now on my phone. While you do that, could someone please pass the sugar? Here you go. So, is Saturday afternoon good for everybody? Saturday works for me, as long as we leave before four. They are open until six, so that should be fine for all of us. Great, then it is settled. I will book four tickets tonight."
+  },
+  {
+   "id": "stereo_dupmono",
+   "file": "stereo_dupmono.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 2,
+   "duration_s": 31.49,
+   "kind": "stereo_doa",
+   "angles_deg": null,
+   "description": "2 identical channels (what iPhone Safari delivers): DOA must return None",
+   "speakers": {
+    "A": "Samantha",
+    "B": "Daniel"
+   },
+   "base_clip": "turns_2spk",
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "Hi, did you manage to find the restaurant okay?",
+     "start": 0.75,
+     "end": 3.736
+    },
+    {
+     "speaker": "B",
+     "text": "Yes, it was easy. The bus stops right outside the door.",
+     "start": 4.086,
+     "end": 7.848
+    },
+    {
+     "speaker": "A",
+     "text": "Great. I booked a table for seven thirty, so we have a little time.",
+     "start": 8.198,
+     "end": 12.204
+    },
+    {
+     "speaker": "B",
+     "text": "Perfect. Should we order a starter to share while we wait?",
+     "start": 12.554,
+     "end": 15.795
+    },
+    {
+     "speaker": "A",
+     "text": "Good idea. I heard the mushroom soup here is excellent.",
+     "start": 16.145,
+     "end": 19.109
+    },
+    {
+     "speaker": "B",
+     "text": "Then I will have the soup, and maybe a green salad on the side.",
+     "start": 19.459,
+     "end": 22.919
+    },
+    {
+     "speaker": "A",
+     "text": "Sounds good. I will ask the waiter to bring two glasses of water.",
+     "start": 23.269,
+     "end": 26.825
+    },
+    {
+     "speaker": "B",
+     "text": "Thank you. By the way, did you get my message about Friday?",
+     "start": 27.175,
+     "end": 31.091
+    }
+   ],
+   "overlaps": [],
+   "reference_text": "Hi, did you manage to find the restaurant okay? Yes, it was easy. The bus stops right outside the door. Great. I booked a table for seven thirty, so we have a little time. Perfect. Should we order a starter to share while we wait? Good idea. I heard the mushroom soup here is excellent. Then I will have the soup, and maybe a green salad on the side. Sounds good. I will ask the waiter to bring two glasses of water. Thank you. By the way, did you get my message about Friday?"
+  },
+  {
+   "id": "selfintro_sarah",
+   "file": "selfintro_sarah.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 18.28,
+   "kind": "names",
+   "description": "self-introduction: Moira voice says 'I'm Sarah' (expected: S -> Sarah, auto-applied)",
+   "speakers": {
+    "S": "Moira",
+    "B": "Daniel"
+   },
+   "name_events": [
+    {
+     "speaker": "S",
+     "name": "Sarah",
+     "kind": "self_intro",
+     "at_segment": 0
+    }
+   ],
+   "segments": [
+    {
+     "speaker": "S",
+     "text": "Hi everyone, I'm Sarah. I just joined the team last week.",
+     "start": 0.75,
+     "end": 4.977
+    },
+    {
+     "speaker": "B",
+     "text": "Welcome Sarah, great to have you with us.",
+     "start": 5.327,
+     "end": 7.768
+    },
+    {
+     "speaker": "S",
+     "text": "Thank you. I am still finding my way around the building.",
+     "start": 8.118,
+     "end": 11.401
+    },
+    {
+     "speaker": "B",
+     "text": "No problem, I can show you the kitchen after the meeting.",
+     "start": 11.751,
+     "end": 15.037
+    },
+    {
+     "speaker": "S",
+     "text": "That would be really helpful, thanks.",
+     "start": 15.387,
+     "end": 17.882
+    }
+   ],
+   "overlaps": [],
+   "reference_text": "Hi everyone, I'm Sarah. I just joined the team last week. Welcome Sarah, great to have you with us. Thank you. I am still finding my way around the building. No problem, I can show you the kitchen after the meeting. That would be really helpful, thanks."
+  },
+  {
+   "id": "introduced_marcus",
+   "file": "introduced_marcus.wav",
+   "synthetic": true,
+   "sample_rate": 16000,
+   "channels": 1,
+   "duration_s": 18.43,
+   "kind": "names",
+   "description": "third-party introduction (expected: suggestion Marcus -> next different speaker M, not auto-applied); 'I am a little tired' is a negative (no name)",
+   "speakers": {
+    "A": "Samantha",
+    "M": "Rishi",
+    "B": "Daniel"
+   },
+   "name_events": [
+    {
+     "speaker": "M",
+     "name": "Marcus",
+     "kind": "introduced",
+     "at_segment": 0
+    }
+   ],
+   "segments": [
+    {
+     "speaker": "A",
+     "text": "Everyone, this is my friend Marcus. He is visiting from Chicago.",
+     "start": 0.75,
+     "end": 4.891
+    },
+    {
+     "speaker": "M",
+     "text": "Hello all, nice to meet you. Thanks for having me.",
+     "start": 5.241,
+     "end": 8.743
+    },
+    {
+     "speaker": "B",
+     "text": "Welcome Marcus. Did you have a good flight?",
+     "start": 9.093,
+     "end": 11.726
+    },
+    {
+     "speaker": "M",
+     "text": "Long, but fine. I am a little tired now, honestly.",
+     "start": 12.076,
+     "end": 16.118
+    },
+    {
+     "speaker": "A",
+     "text": "Let us get you a coffee then.",
+     "start": 16.468,
+     "end": 18.028
+    }
+   ],
+   "overlaps": [],
+   "reference_text": "Everyone, this is my friend Marcus. He is visiting from Chicago. Hello all, nice to meet you. Thanks for having me. Welcome Marcus. Did you have a good flight? Long, but fine. I am a little tired now, honestly. Let us get you a coffee then."
+  }
+ ]
+}
