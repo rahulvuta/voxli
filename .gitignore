@@ -1,0 +1,14 @@
+.env
+.venv/
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.DS_Store
+backend/models_cache/
+eval/clips/*.wav
+voice_memory.json
+eval/clips/stems/
+eval/clips/identity/
+eval/clips/overlap/
+web/screenshots/*.png
