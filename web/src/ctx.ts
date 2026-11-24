@@ -9,10 +9,13 @@ export interface Ctx {
   groups: Map<string, Utt[]>
   hidden: Set<string>
   sorted: Utt[]
+  interruptedBy: Map<string, string>
+  unsure: Set<string> // speakers whose latest line is of uncertain origin
+  hasDirection: boolean
   look(skey: string): Look
   name(skey: string): string
   jump(ukey: string): void
-  openSpeaker(skey: string): void
+  openSpeaker(skey: string, focus?: string): void
 }
 export const C = createContext<Ctx | null>(null)
 export const useCtx = () => useContext(C)!

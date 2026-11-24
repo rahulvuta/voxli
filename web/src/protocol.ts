@@ -51,3 +51,7 @@ export type ClientMessage =
   | { type: 'suggest_replies' }
   | { type: 'set_voice_memory'; enabled: boolean }
   | { type: 'forget_all' }
+
+// Text-to-speech HTTP API (docs/CONTRACT.md "HTTP: text-to-speech").
+export interface TtsVoice { id: string; name: string; description: string; accent: string; gender: string }
+export interface TtsVoices { default: string; voices: TtsVoice[] }

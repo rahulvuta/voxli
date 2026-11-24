@@ -143,3 +143,16 @@ export function derive(utts: Record<string, Utt>) {
   const sorted = Object.values(utts).filter((u) => !hidden.has(u.key)).sort((a, b) => a.epoch - b.epoch || a.start - b.start || a.id.localeCompare(b.id))
   return { groups, hidden, sorted }
 }
+
+/** Who interrupted whom (by utterance), and which speakers' latest line has an uncertain speaker. */
+export function relations(utts: Record<string, Utt>, ann: Record<string, Ann>, sorted: Utt[]) {
+  const interruptedBy = new Map<string, string>()
+  for (const [k, a] of Object.entries(ann)) if (a.interrupts && utts[k]) interruptedBy.set(a.interrupts, k)
+  const latest = new Map<string, Utt>()
+  for (const u of sorted) latest.set(u.skey, u)
+  const unsure = new Set<string>()
+  for (const [k, u] of latest) if (u.speaker_uncertain || u.speaker_id === 'UNKNOWN') unsure.add(k)
+  return { interruptedBy, unsure }
+}
+
+export const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`

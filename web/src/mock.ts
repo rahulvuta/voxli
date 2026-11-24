@@ -1,10 +1,10 @@
 // ?mock=1 — a scripted fake conversation so the UI can be built and demoed without the backend.
-// Extra switches: &speed=2  &mono=1 (one mic channel)  &asr=local  &drop=1 (connection drops at ~30 s)
+// Extra switches: &speed=2  &from=27 (start 27 s into the script)  &mono=1 (one mic channel)  &asr=local  &drop=1 (connection drops at ~30 s)
 import type { ClientMessage, ServerEvent, Speaker, Utterance, Word } from './protocol'
 import type { Transport } from './net'
 import type { Conn } from './store'
 
-interface Opts { speed: number; mono: boolean; asr: 'deepgram' | 'local'; drop: boolean }
+interface Opts { speed: number; from: number; mono: boolean; asr: 'deepgram' | 'local'; drop: boolean }
 interface H { conn(c: Conn): void; event(e: ServerEvent): void }
 
 const NAMES: Record<string, Partial<Speaker>> = {
@@ -24,20 +24,26 @@ const SUMMARY: Record<string, string> = {
 export function createMock(h: H, o: Opts): Transport {
   const timers: number[] = []
   const t0 = performance.now()
-  const clock = () => ((performance.now() - t0) / 1000) * o.speed
-  const at = (t: number, fn: () => void) => timers.push(window.setTimeout(fn, Math.max(0, (t * 1000) / o.speed - (performance.now() - t0))))
+  const clock = () => o.from + ((performance.now() - t0) / 1000) * o.speed
+  // Script events are queued by time, then replayed: anything before `from` fires at once (in order), the rest on a timer.
+  const queue: [number, () => void][] = []
+  let live = false
+  const at = (t: number, fn: () => void) => {
+    if (!live) queue.push([t, fn])
+    else timers.push(window.setTimeout(fn, Math.max(0, ((t - clock()) * 1000) / o.speed)))
+  }
   const spk: Record<string, Speaker> = {}
   const finals: { id: string; speaker_id: string; end: number }[] = []
   let youN = 0
 
   const upsert = (id: string, patch: Partial<Speaker> = {}) => {
     const base: Speaker = { id, label: 'Speaker', name: null, name_source: null, color_index: 0, direction_deg: null, active: false }
-    spk[id] = { ...base, ...NAMES[id], ...spk[id], ...patch }
+    spk[id] = { ...base, ...NAMES[id], ...spk[id], ...patch, ...(o.mono ? { direction_deg: null } : {}) }
     h.event({ type: 'speaker', speaker: spk[id] })
   }
   const announce = () => {
     h.event({ type: 'status', asr: o.asr, stereo: !o.mono })
-    for (const id of Object.keys(spk)) upsert(id, o.mono ? { direction_deg: null } : {})
+    for (const id of Object.keys(spk)) upsert(id)
   }
 
   /** Streams `text` word by word (interim), then finalises. Times are session seconds. */
@@ -62,7 +68,8 @@ export function createMock(h: H, o: Opts): Transport {
     at(t, () => h.event({ type: 'annotation', utterance_id: id, reply_to, interrupts, thread_id: null, incomplete }))
 
   const script = () => {
-    announce()
+    at(0.3, () => h.conn('open'))
+    at(0.4, announce)
     // 1. Self-introduction -> name applied automatically (with Undo).
     say(1, 'u1', 'S1', "Hi everyone, I'm Maya. Shall we start with the budget?", 3.8)
     at(4.9, () => {
@@ -84,20 +91,32 @@ export function createMock(h: H, o: Opts): Transport {
     // 5. Uncertain speaker (new voice, short evidence).
     say(25, 'u7', 'S4', 'I think we can still afford it if we cut the catering.', 3.6, { speaker_uncertain: true, speaker_confidence: 0.41 }, [1, 8])
     ann(28.7, 'u7', 'u6')
-    // 6. Introduction by someone else -> suggestion chip needing confirmation.
+    // 6. Introduction by someone else -> suggestion needing confirmation.
     say(31, 'u8', 'S2', 'Oh, and this is my friend Priya, she helps with events.', 3.4)
     at(34.6, () => h.event({ type: 'name_suggestion', id: 'n2', speaker_id: 'S4', name: 'Priya', evidence_utterance_id: 'u8', kind: 'introduced', auto_applied: false }))
     say(36, 'u9', 'S4', 'Thanks for having me.', 1.6)
     ann(37.7, 'u9', 'u8')
     say(39.5, 'u10', 'S1', "That works for me. Let's go with the cheaper catering.", 3.4)
     ann(43, 'u10', 'u7')
+    say(44.5, 'u11', 'S3', "Then I'll tell the venue we are out.", 2.6)
+    ann(47.2, 'u11', 'u10')
+    // 7. Busy room banner, then a calm reply.
+    at(48, () => h.event({ type: 'room', busy: true }))
+    at(58, () => h.event({ type: 'room', busy: false }))
+    say(50, 'u12', 'S2', 'Perfect, thanks everyone.', 2)
+    ann(52.2, 'u12', 'u11')
 
     if (o.drop) {
       at(30, () => h.conn('reconnecting'))
       at(37, () => { h.conn('open'); announce() })
     }
   }
-  at(0.3, () => { h.conn('open'); script() })
+  script()
+  queue.sort((a, b) => a[0] - b[0])
+  // Even the "already happened" part runs from a timer, so a cancelled start (React StrictMode) leaves nothing behind.
+  timers.push(window.setTimeout(() => { for (const [t, fn] of queue) if (t <= o.from) fn() }, 0))
+  for (const [t, fn] of queue) if (t > o.from) timers.push(window.setTimeout(fn, ((t - o.from) * 1000) / o.speed))
+  live = true
 
   return {
     audio() {},
