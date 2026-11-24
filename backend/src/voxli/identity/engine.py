@@ -28,6 +28,14 @@ MIN_EMBED = 0.4  # s; shorter than this we do not even embed
 MARGIN_SHORT = 0.15  # short segments must also beat the runner-up by this to be called certain
 EXEMPLARS = 6
 POOL = 8         # recent in-between segments kept so two that agree can found a new speaker
+# Real phone-mic voices score far lower against themselves than synthetic ones (often 0.3-0.5), so a
+# single low score is NOT proof of a new person. A new speaker needs corroboration: a fresh vendor
+# diarization label, or two unmatched segments that agree with each other.
+T_STICK = 0.20   # vendor label already maps to X and voice is at least this close -> stay with X
+T_ADAPT = 0.30   # ...and at least this close -> also fold into X so the voiceprint learns the real voice
+T_AGREE = 0.50   # two pooled segments this similar (and closer to each other than to anyone) -> new person
+NEW_MIN_S = 1.5  # s; a fresh vendor label only founds a speaker from a segment at least this long
+DEBUG = os.environ.get("VOXLI_DEBUG_ID") == "1"  # logs scores and decisions only, never audio or text
 
 
 @dataclass
@@ -63,7 +71,8 @@ class IdentityEngine:
         self._mutes: list[tuple[float, float]] = []
         self._hints: dict[str, Counter] = {}   # vendor label -> {our id: confident count}
         self._merges: list[tuple[str, str]] = []
-        self._pool: deque = deque(maxlen=POOL)  # (embedding, seconds) of uncertain segments
+        self._pool: deque = deque(maxlen=POOL)  # (embedding, seconds, best score, t0, t1) of unmatched segments
+        self._relabels: list[tuple[float, float, str]] = []
         self._counter = 0                      # ids/colors are never reused, even after merges
 
     # ---- main entry -------------------------------------------------------------------
@@ -98,22 +107,48 @@ class IdentityEngine:
                 return Assignment("UNKNOWN", 0.0, True, False)
             certain = s >= T_HI and s - second >= MARGIN_SHORT
             return Assignment(best, min(conf, 0.6), not certain, False)
-        if s < T_LO:
+        a = self._decide(e, dur, direction, hint, scores, best, t_start, t_end)
+        if DEBUG:
+            top = sorted(scores.items(), key=lambda kv: -kv[1])[:3]
+            print(f"[id] {dur:.1f}s hint={hint} scores={[(k, round(v, 2)) for k, v in top]} -> "
+                  f"{a.speaker_id}{' NEW' if a.is_new else ''}{' ?' if a.uncertain else ''}", flush=True)
+        return a
+
+    def _decide(self, e, dur, direction, hint, scores, best, t0, t1) -> Assignment:
+        s = scores[best]
+        conf = lambda x: float(np.clip((x - T_LO) / (0.9 - T_LO), 0.0, 1.0))
+        if s >= T_HI:
+            self._fold(best, e, dur, direction, hint)
+            self._auto_merge(best)
+            return Assignment(best, conf(s), False, False)
+        # the vendor already heard this label as X: stay with X unless the voice clearly says otherwise
+        hx = self._hinted(hint)
+        if hx and scores[hx] >= T_STICK:
+            if scores[hx] >= T_ADAPT:
+                self._fold(hx, e, dur, direction, hint)
+                self._auto_merge(hx)
+            return Assignment(hx, max(conf(scores[hx]), 0.3), True, False)
+        # someone new? needs corroboration, never a single low score on its own
+        fresh = hint is not None and hint not in self._hints
+        if fresh and s < T_LO and dur >= NEW_MIN_S:
             return self._new(e, dur, direction, hint, s)
-        if s < T_HI:
-            # between: keep the guess but flag it. Two in-between segments that agree with each
-            # other are a new person who merely resembles an existing one.
-            for j, (pe, pd) in enumerate(self._pool):
-                if float(e @ pe) >= T_HI:
-                    del self._pool[j]
-                    a = self._new(e, dur, direction, hint, s)
-                    self._voices[a.speaker_id].add(pe, min(pd, 5.0))
-                    return a
-            self._pool.append((e, dur))
-            return Assignment(best, conf, True, False)
-        self._fold(best, e, dur, direction, hint)
-        self._auto_merge(best)
-        return Assignment(best, conf, False, False)
+        for j, (pe, pd, ps, p0, p1) in enumerate(self._pool):
+            agree = float(e @ pe)
+            if agree >= T_AGREE and agree >= max(s, ps) + 0.1:
+                del self._pool[j]
+                a = self._new(e, dur, direction, hint, s)
+                self._voices[a.speaker_id].add(pe, min(pd, 5.0))
+                self._relabels.append((p0, p1, a.speaker_id))  # the earlier "?" line was this new person
+                return a
+        self._pool.append((e, dur, s, t0, t1))
+        return Assignment(best, conf(s), True, False)
+
+    def _hinted(self, hint: str | None) -> str | None:
+        c = self._hints.get(hint or "")
+        if not c:
+            return None
+        sid, _ = c.most_common(1)[0]
+        return sid if sid in self._voices else None
 
     def match(self, audio: np.ndarray) -> Assignment:
         """Read-only best match against known voices: never creates a speaker or moves a centroid.
@@ -177,6 +212,12 @@ class IdentityEngine:
         """Automatic late merges since the last call, as (from_id, into_id); the session should
         emit speaker_removed{id: from, merged_into: into} and re-send the `into` speaker."""
         out, self._merges = self._merges, []
+        return out
+
+    def pending_relabels(self) -> list[tuple[float, float, str]]:
+        """Earlier segments (t0, t1) now known to belong to a newly founded speaker; drains the list.
+        The session should move the caption covering that span to the new id and re-send it."""
+        out, self._relabels = self._relabels, []
         return out
 
     def rename(self, speaker_id: str, name: str, source: str = "user") -> Speaker | None:

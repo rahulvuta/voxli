@@ -25,6 +25,9 @@ class FakeIdentity:
     def pending_merges(self):
         return []
 
+    def pending_relabels(self):
+        return []
+
 
 class NoASR:
     name = "offline"

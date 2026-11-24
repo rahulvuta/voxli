@@ -34,16 +34,37 @@ def feed(eng, v, n=3, secs=2.0, **kw):
     return [eng.assign(seg(v, secs), 0, secs, **kw) for _ in range(n)]
 
 
-def test_same_voice_keeps_id_and_new_voice_gets_new_id(tmp_path):
+def test_same_voice_keeps_id_and_new_voice_needs_corroboration(tmp_path):
     eng = fake_engine(tmp_path)
     a1, a2 = feed(eng, A, 2)
-    b1 = feed(eng, B, 1)[0]
+    b1, b2 = feed(eng, B, 2)          # no vendor label: one unlike segment is only a "?" guess...
     a3 = feed(eng, A, 1)[0]
-    assert a1.is_new and not a2.is_new and b1.is_new
-    assert a1.speaker_id == a2.speaker_id == a3.speaker_id != b1.speaker_id
-    assert not a3.uncertain
+    assert a1.is_new and not a2.is_new
+    assert b1.speaker_id == "S1" and b1.uncertain and not b1.is_new
+    assert b2.is_new and b2.speaker_id == "S2"   # ...a second that agrees founds the speaker
+    assert eng.pending_relabels() == [(0, 2.0, "S2")] and eng.pending_relabels() == []  # fix the "?" line
+    assert a1.speaker_id == a2.speaker_id == a3.speaker_id == "S1" and not a3.uncertain
     assert [s.label for s in eng.speakers()] == ["Speaker A", "Speaker B"]
     assert [s.color_index for s in eng.speakers()] == [0, 1]
+
+
+def test_fresh_vendor_label_founds_speaker_at_once(tmp_path):
+    eng = fake_engine(tmp_path)
+    feed(eng, A, 2, hint="0")
+    b = feed(eng, B, 1, hint="1")[0]
+    assert b.is_new and b.speaker_id == "S2"
+    assert not feed(eng, B, 1, secs=1.0, hint="2")[0].is_new  # too short to found one alone
+
+
+def test_known_vendor_label_sticks_despite_low_voice_score(tmp_path):
+    """Real phone voices score ~0.3-0.5 against themselves: that must not spawn a new speaker."""
+    eng = fake_engine(tmp_path)
+    feed(eng, A, 2, hint="0")
+    drift = vec(0.35, 0, 0.937, 0)   # cos 0.35 to A: same person, bad mic moment
+    rs = [eng.assign(seg(drift), 0, 2.0, hint="0") for _ in range(4)]
+    assert all(r.speaker_id == "S1" and not r.is_new for r in rs) and rs[0].uncertain
+    assert len(eng.speakers()) == 1
+    assert eng._voices["S1"].n > 2   # voiceprint adapted to the real voice
 
 
 def test_uncertain_zone_guesses_but_flags_and_does_not_pollute(tmp_path):
@@ -98,7 +119,7 @@ def test_manual_merge_and_rename(tmp_path):
     assert [s.id for s in eng.speakers()] == ["S1"] and eng.speakers()[0].name == "Sarah"
     # B's voice now belongs to S1; the next new voice never reuses S2
     assert feed(eng, B, 1)[0].speaker_id == "S1"
-    assert feed(eng, FAR, 1)[0].speaker_id == "S3"
+    assert feed(eng, FAR, 2)[-1].speaker_id == "S3"
 
 
 def test_auto_merge_when_two_speakers_converge(tmp_path):
@@ -150,16 +171,16 @@ def test_real_voices_stable_across_turns(ecapa, tmp_path):
     voices = ["Samantha", "Daniel", "Rishi", "Moira"]
     eng = IdentityEngine(embed=ecapa, memory_path=tmp_path / "vm.json")
     seen: dict[str, set[str]] = {v: set() for v in voices}
-    for turn in (3, 5, 2, 7, 4, 6):        # 6 turns; the voices take turns each round
+    for k, turn in enumerate((3, 5, 2, 7, 4, 6)):  # 6 turns; the voices take turns each round
         for v in voices:
             x = sf.read(CLIPS / f"{v}_{turn}.wav", dtype="float32")[0]
             a = eng.assign(x, 0, len(x) / 16000)
-            seen[v].add(a.speaker_id)
-    ids = {v: max(seen[v], key=lambda i: i != "UNKNOWN") for v in voices}
+            if k >= 2:  # from round 3 on every voice must be settled on one id
+                seen[v].add(a.speaker_id)
+    ids = {v: next(iter(seen[v])) for v in voices}
     assert len(set(ids.values())) == 4                       # four voices -> four identities
     assert len(eng.speakers()) == 4
-    # after the first rounds, each voice maps to exactly one id
-    assert all(len(seen[v] - {"UNKNOWN"}) == 1 for v in voices), seen
+    assert all(len(seen[v]) == 1 for v in voices), seen
 
 
 def test_match_is_read_only():

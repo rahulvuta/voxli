@@ -238,6 +238,11 @@ class Session:
         for gone in set(self._sent) - {s.id for s in current}:
             del self._sent[gone]
             await self.send({"type": "speaker_removed", "id": gone})
+        for t0, t1, sid in self.identity.pending_relabels():  # a "?" guess turned out to be a new person (after its upsert)
+            for u in self.history:
+                if u.is_final and u.source == "live" and u.start < t1 and t0 < u.end:
+                    u.speaker_id, u.speaker_uncertain = sid, False
+                    await self.send({"type": "utterance", "utterance": asdict(u)})
 
     async def _announce(self, speaker_id: str) -> None:
         """Every speaker (incl. YOU / UNKNOWN) must be upserted before its first utterance."""
