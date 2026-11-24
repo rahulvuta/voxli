@@ -1,7 +1,10 @@
-"""Deepgram Aura-2 text-to-speech. Returns MP3 bytes; never logs or returns the API key."""
+"""Deepgram Aura-2 text-to-speech. Returns loudness-normalised WAV bytes; never logs or returns the API key."""
+import io
 from collections import OrderedDict
 
 import httpx
+import numpy as np
+import soundfile as sf
 
 from .config import DEEPGRAM_API_KEY
 
@@ -9,6 +12,9 @@ URL = "https://api.deepgram.com/v1/speak"
 TIMEOUT_S = 6.0
 CACHE_SIZE = 64
 DEFAULT_VOICE = "aura-2-luna-en"
+RATE = 24000
+TARGET_RMS = 0.25  # about -12 dBFS: loud on a phone speaker; Aura's raw output is far quieter
+MAX_GAIN = 10.0
 
 # (id, name, accent, gender, description)
 _VOICES = [
@@ -58,7 +64,7 @@ async def synthesize(text: str, voice: str) -> bytes:
     try:
         r = await _http().post(
             URL,
-            params={"model": voice, "encoding": "mp3"},
+            params={"model": voice, "encoding": "linear16", "container": "wav", "sample_rate": RATE},
             headers={"Authorization": f"Token {DEEPGRAM_API_KEY}"},
             json={"text": text},
         )
@@ -68,7 +74,22 @@ async def synthesize(text: str, voice: str) -> bytes:
         raise TTSError("text-to-speech provider unreachable", 503) from None
     if r.status_code != 200 or not r.content:
         raise TTSError(f"text-to-speech provider error ({r.status_code})", 502)
-    _cache[key] = r.content
+    try:
+        out = loud(r.content)
+    except (RuntimeError, ValueError):
+        raise TTSError("text-to-speech provider sent unreadable audio", 502) from None
+    _cache[key] = out
     if len(_cache) > CACHE_SIZE:
         _cache.popitem(last=False)
-    return r.content
+    return out
+
+
+def loud(wav: bytes) -> bytes:
+    """Raise speech to TARGET_RMS, with a soft (tanh) limiter so peaks never clip."""
+    x, sr = sf.read(io.BytesIO(wav), dtype="float32")
+    rms = float(np.sqrt(np.mean(x ** 2))) if x.size else 0.0
+    if rms > 1e-5:
+        x = np.tanh(x * min(TARGET_RMS / rms, MAX_GAIN)) * 0.97
+    buf = io.BytesIO()
+    sf.write(buf, x, sr, format="WAV", subtype="PCM_16")
+    return buf.getvalue()

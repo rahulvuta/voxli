@@ -51,6 +51,6 @@ async def tts(request: Request):
     if voice not in VOICE_IDS:
         return JSONResponse({"error": "unknown voice"}, 400)
     try:
-        return Response(await synthesize(text, voice), media_type="audio/mpeg")
+        return Response(await synthesize(text, voice), media_type="audio/wav")
     except TTSError as e:
         return JSONResponse({"error": str(e)}, e.status)

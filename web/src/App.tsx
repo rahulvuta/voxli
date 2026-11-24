@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
-import { startMic, MicError, type Mic } from './audio'
+import { startMic, MicError, IOS, type Mic } from './audio'
 import { Composer } from './components/Composer'
 import { Conversation } from './components/Conversation'
 import { People } from './components/People'
@@ -137,12 +137,16 @@ export default function App() {
     const id = uid()
     setLastSpoken(t)
     setSpeaking(true)
-    void speakAloud(t, settings.voice, { onStart: () => send({ type: 'tts_start', id, text: t }), onEnd: () => send({ type: 'tts_end', id }), onFallback: fallback }).then(() => setSpeaking(false))
+    if (IOS) micRef.current?.hold() // else iOS routes the reply to the earpiece at call volume
+    void speakAloud(t, settings.voice, { onStart: () => send({ type: 'tts_start', id, text: t }), onEnd: () => send({ type: 'tts_end', id }), onFallback: fallback })
+      .then(() => { setSpeaking(false); if (IOS) void micRef.current?.release() })
   }
   const previewVoice = (id: string) => {
     if (preview === id) { stopSpeaking(); return }
     setPreview(id)
-    void speakAloud('Hi, this is how I will sound when you type to speak.', id, { onFallback: fallback }).then(() => setPreview((p) => (p === id ? null : p)))
+    if (IOS) micRef.current?.hold()
+    void speakAloud('Hi, this is how I will sound when you type to speak.', id, { onFallback: fallback })
+      .then(() => { setPreview((p) => (p === id ? null : p)); if (IOS) void micRef.current?.release() })
   }
   const openSettings = () => {
     setSheet({ k: 'settings' })

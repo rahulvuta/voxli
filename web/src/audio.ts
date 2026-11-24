@@ -1,5 +1,16 @@
 // Mic -> AudioWorklet (public/pcm-worklet.js) -> 16 kHz Int16 interleaved frames.
-export interface Mic { stop(): void }
+export interface Mic {
+  stop(): void
+  /** Release the mic while the phone talks (iOS plays through the quiet earpiece while it records). */
+  hold(): void
+  /** Re-acquire after hold(); resolves when capture is back. */
+  release(): Promise<void>
+}
+
+// iPadOS reports itself as a Mac; touch points give it away.
+export const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+type Session = { type: string }
+const session = (navigator as Navigator & { audioSession?: Session }).audioSession
 export type MicState = 'on' | 'paused'
 export class MicError extends Error {
   kind: 'denied' | 'missing' | 'insecure' | 'other'
@@ -24,9 +35,10 @@ export function isDuplicatedMono(chunks: Int16Array[]): boolean {
 
 export async function startMic(o: Opts): Promise<Mic> {
   if (!navigator.mediaDevices?.getUserMedia) throw new MicError('insecure', 'The microphone needs a secure (https) page.')
+  const open = () => navigator.mediaDevices.getUserMedia({ audio: { channelCount: 2, echoCancellation: false, noiseSuppression: false, autoGainControl: true } })
   let stream: MediaStream
   try {
-    stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 2, echoCancellation: false, noiseSuppression: false, autoGainControl: true } })
+    stream = await open()
   } catch (e) {
     const n = (e as DOMException).name
     if (n === 'NotAllowedError' || n === 'SecurityError') throw new MicError('denied', 'Microphone permission was blocked.')
@@ -38,7 +50,7 @@ export async function startMic(o: Opts): Promise<Mic> {
   const ctx = new AudioContext({ latencyHint: 'interactive' })
   await ctx.resume()
   await ctx.audioWorklet.addModule('/pcm-worklet.js')
-  const src = ctx.createMediaStreamSource(stream)
+  let src = ctx.createMediaStreamSource(stream)
   const node = new AudioWorkletNode(ctx, 'pcm16', {
     numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [1],
     channelCount: real, channelCountMode: 'explicit', channelInterpretation: 'discrete',
@@ -68,8 +80,27 @@ export async function startMic(o: Opts): Promise<Mic> {
   const wake = () => { if (document.visibilityState === 'visible' && ctx.state !== 'running') void ctx.resume().catch(() => {}) }
   document.addEventListener('visibilitychange', wake)
   track.onended = () => o.onState('paused')
+  let holds = 0, reopening: Promise<void> | null = null
 
   return {
+    hold() {
+      if (holds++ > 0) return // nested: a new reply started before the last one ended
+      src.disconnect()
+      stream.getTracks().forEach((t) => { t.onended = null; t.stop() }) // the worklet keeps the timeline going with silence
+      if (session) session.type = 'playback'
+    },
+    release() {
+      if (holds === 0 || --holds > 0) return reopening ?? Promise.resolve()
+      if (session) session.type = 'auto'
+      reopening = open().then((s) => {
+        stream = s
+        src = ctx.createMediaStreamSource(s)
+        src.connect(node)
+        s.getAudioTracks()[0].onended = () => o.onState('paused')
+        if (ctx.state !== 'running') void ctx.resume().catch(() => {})
+      }).catch(() => o.onState('paused')).finally(() => { reopening = null })
+      return reopening
+    },
     stop() {
       document.removeEventListener('visibilitychange', wake)
       ctx.onstatechange = null

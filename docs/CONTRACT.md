@@ -76,5 +76,5 @@ Data classes for these live in `voxli/types.py` (exists). Stubs exist for every 
 ## HTTP: text-to-speech (added for the voice upgrade)
 Vite proxies `/api` → `http://127.0.0.1:8000`. Keys stay on the server.
 - `GET /api/tts/voices` → `{"default": "<voice_id>", "voices": [{"id", "name", "description", "accent", "gender"}]}` — a short curated list (8–12) of Deepgram Aura-2 English voices.
-- `POST /api/tts` JSON `{"text": str (1–500 chars), "voice": voice_id | null}` → `200 audio/mpeg` bytes (Deepgram Aura-2). Errors: `400` bad input, `502`/`503` provider unavailable or timeout (≤ 6 s), body `{"error": str}`. The web app falls back to the browser's `speechSynthesis` on any non-200 and shows a small notice.
+- `POST /api/tts` JSON `{"text": str (1–500 chars), "voice": voice_id | null}` → `200 audio/wav` bytes (Deepgram Aura-2 linear16, loudness-normalised to about -13 dBFS with a soft limiter). Errors: `400` bad input, `502`/`503` provider unavailable or timeout (≤ 6 s), body `{"error": str}`. The web app falls back to the browser's `speechSynthesis` on any non-200 and shows a small notice.
 - The web app still sends `tts_start` right before playback starts and `tts_end` when playback ends (so the session mutes the phone's own voice for exactly that window).

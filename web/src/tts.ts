@@ -1,4 +1,4 @@
-// Voice output: server MP3 (POST /api/tts) first, the phone's own speechSynthesis as the fallback.
+// Voice output: server WAV (POST /api/tts) first, the phone's own speechSynthesis as the fallback.
 import type { TtsVoices } from './protocol'
 
 export async function fetchVoices(): Promise<TtsVoices | null> {
@@ -10,7 +10,7 @@ export async function fetchVoices(): Promise<TtsVoices | null> {
   } catch { return null }
 }
 
-// A silent clip played inside the tap unlocks the shared <audio> element on iOS, so the real MP3 can play after the fetch.
+// A silent clip played inside the tap unlocks the shared <audio> element on iOS, so the real reply can play after the fetch.
 const SILENT = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='
 let el: HTMLAudioElement | null = null
 let current: (() => void) | null = null
